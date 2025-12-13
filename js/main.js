@@ -1,4 +1,3 @@
-const appStr = `
 document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Toggle
     const hamburger = document.querySelector('.hamburger');
@@ -48,14 +47,86 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add visible class styling dynamically
     const style = document.createElement('style');
     style.innerHTML = `
-    .visible {
-        opacity: 1 !important;
-transform: translateY(0)!important;
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
-`;
+    `;
     document.head.appendChild(style);
-});
-`;
 
-// Writing the content to file
-console.log(appStr);
+    // Dynamic Background Slideshow - Only for Hero Section
+    const heroSection = document.querySelector('.hero');
+
+    if (heroSection) {
+        const images = [
+            'images/bg1.jpg',
+            'images/bg2.jpg',
+            'images/bg3.jpg',
+            'images/bg4.jpg'
+        ];
+
+        const slideshowContainer = document.createElement('div');
+        slideshowContainer.id = 'bg-slideshow';
+        // Prepend to hero section instead of body
+        heroSection.prepend(slideshowContainer);
+
+        // Preload and create divs
+        const slides = images.map((imgSrc, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'bg-slide';
+            slide.style.backgroundImage = `url('${imgSrc}')`;
+            if (index === 0) slide.classList.add('active');
+            slideshowContainer.appendChild(slide);
+            return slide;
+        });
+
+        let currentSlide = 0;
+        const intervalTime = 30000; // 30 seconds as requested
+
+        setInterval(() => {
+            // Remove active from current
+            slides[currentSlide].classList.remove('active');
+
+            // Move to next
+            currentSlide = (currentSlide + 1) % slides.length;
+
+            // Add active to next
+            slides[currentSlide].classList.add('active');
+        }, intervalTime);
+    }
+
+    // Create Particle Effect for Hero Section
+    const createParticles = () => {
+        const heroSection = document.querySelector('.hero');
+        if (!heroSection) return;
+
+        const particlesContainer = document.createElement('div');
+        particlesContainer.className = 'particles';
+        heroSection.appendChild(particlesContainer);
+
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+
+            // Random size between 2-6px
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            // Random horizontal position
+            particle.style.left = `${Math.random() * 100}%`;
+
+            // Random animation delay
+            particle.style.animationDelay = `${Math.random() * 15}s`;
+
+            // Random animation duration
+            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+
+            particlesContainer.appendChild(particle);
+        }
+    };
+
+    createParticles();
+});
