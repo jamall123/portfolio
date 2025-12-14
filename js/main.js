@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (heroSection) {
         const images = [
-            'images/bg1.jpg',
-            'images/bg2.jpg',
-            'images/bg3.jpg'
+            'images/bg1.webp',
+            'images/bg2.webp',
+            'images/bg3.webp'
         ];
 
         const slideshowContainer = document.createElement('div');
