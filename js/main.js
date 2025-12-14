@@ -61,8 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const images = [
             'images/bg1.jpg',
             'images/bg2.jpg',
-            'images/bg3.jpg',
-            'images/bg4.jpg'
+            'images/bg3.jpg'
         ];
 
         const slideshowContainer = document.createElement('div');
